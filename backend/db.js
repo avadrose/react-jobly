@@ -1,5 +1,7 @@
 "use strict";
+
 /** Database setup for jobly. */
+
 const { Client } = require("pg");
 const { getDatabaseUri } = require("./config");
 
@@ -14,7 +16,11 @@ if (process.env.NODE_ENV === "production") {
   });
 } else {
   db = new Client({
-    connectionString: getDatabaseUri()
+    user: "postgres",
+    host: "localhost",
+    database: getDatabaseUri(),
+    password: process.env.PGPASSWORD,
+    port: 5432
   });
 }
 
